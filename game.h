@@ -26,11 +26,10 @@
  * the game struct defines the information about the game state that is passed
  *to the various functions that are part of the implementation of a game.
  **/
-struct game
-{
-        struct player players[NUM_PLAYERS];
-        board gameboard;
-        struct player* current, *other;
+struct game {
+  struct player players[NUM_PLAYERS];
+  board gameboard;
+  struct player* current, *other;
 };
 
 /**

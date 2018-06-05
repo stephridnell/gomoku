@@ -16,9 +16,8 @@
  * definition of the BOOLEAN datatype. Remember that all counting in C begins at
  * 0!
  **/
-typedef enum
-{
-        FALSE,
-        TRUE
+typedef enum {
+  FALSE,
+  TRUE
 } BOOLEAN;
 #endif /* end of include guard for shared.h */

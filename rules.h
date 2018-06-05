@@ -27,9 +27,8 @@ struct player;
 #define NUMINROW 5
 
 /* coordinate is an x-y pair that specifies a location on the board */
-struct coordinate
-{
-        int x, y;
+struct coordinate {
+  int x, y;
 };
 
 /**

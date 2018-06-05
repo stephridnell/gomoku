@@ -21,26 +21,21 @@
  * there is a winning numinrow tokens that matches the player's token. If there
  * is, return TRUE
  **/
-BOOLEAN is_winner(const struct player* curplayer)
-{
-        return FALSE;
+BOOLEAN is_winner(const struct player* curplayer) {
+  return FALSE;
 }
 
 /**
  * check if a move is valid. It is valid if the cell specified is empty
  **/
-BOOLEAN move_is_valid(const struct player* curplayer,
-                      const struct coordinate* curmove)
-{
-        return FALSE;
+BOOLEAN move_is_valid(const struct player* curplayer, const struct coordinate* curmove) {
+  return FALSE;
 }
 
 /**
  * apply the move to the board - simply set the board coordinates specified by
  * themove to the toke specified.
  **/
-BOOLEAN apply_move(board theboard, const struct coordinate* themove,
-                   enum cell token)
-{
-        return FALSE;
+BOOLEAN apply_move(board theboard, const struct coordinate* themove, enum cell token) {
+  return FALSE;
 }

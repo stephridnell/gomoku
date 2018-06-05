@@ -17,6 +17,5 @@
 /**
  * initialise the board to be an empty board
  **/
-void init_board(board aboard)
-{
+void init_board(board aboard) {
 }

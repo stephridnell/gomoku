@@ -24,12 +24,11 @@
 #define BOARDWIDTH BOARDHEIGHT
 
 /* a cell on the board */
-enum cell
-{
-        C_EMPTY,
-        C_RED,
-        C_WHITE,
-        C_INVALID
+enum cell {
+  C_EMPTY,
+  C_RED,
+  C_WHITE,
+  C_INVALID
 };
 
 /* rename an array or arrays of type enum cell to be a board - note that under

@@ -26,15 +26,14 @@
  * enumeration that specifies the various return values you should be returning
  * handling from functions that read input from the keyboard.
  **/
-enum input_result
-{
-        /* the i/o operation failed - this is often due to buffer overflow */
-        IR_FAILURE,
-        /* the i/o operation succeeded */
-        IR_SUCCESS,
-        /* there was a request to return to the main menu such as when quitting
-           the game */
-        IR_RTM
+enum input_result {
+  /* the i/o operation failed - this is often due to buffer overflow */
+  IR_FAILURE,
+  /* the i/o operation succeeded */
+  IR_SUCCESS,
+  /* there was a request to return to the main menu such as when quitting
+     the game */
+  IR_RTM
 };
 
 /**

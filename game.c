@@ -22,9 +22,8 @@
  * also ensure the board is coorectly initialised through a call to
  * init_board().
  **/
-enum input_result init_game(struct game* newgame, struct player players[])
-{
-        return IR_FAILURE;
+enum input_result init_game(struct game* newgame, struct player players[]) {
+  return IR_FAILURE;
 }
 
 /**
@@ -32,14 +31,13 @@ enum input_result init_game(struct game* newgame, struct player players[])
  * then loops and calls take_turn for the current player and swaps players until
  * a player has won the game
  **/
-void play_game(void)
-{
-        /* the game struct that holds the data on the game state */
-        struct game curgame;
-        /* init the game struct */
-        /* the main game loop */
-        /* swap the game pointers */
-        /* return the winner */
+void play_game(void) {
+  /* the game struct that holds the data on the game state */
+  struct game curgame;
+  /* init the game struct */
+  /* the main game loop */
+  /* swap the game pointers */
+  /* return the winner */
 }
 
 /**
@@ -50,8 +48,7 @@ void play_game(void)
  * content understanding is very important and thus it is worth substantially
  * more than a few lines of code are worth elsewhere in this assignment.
  **/
-void swap_players(struct player** first, struct player** second)
-{
+void swap_players(struct player** first, struct player** second) {
 }
 
 /**
@@ -59,7 +56,6 @@ void swap_players(struct player** first, struct player** second)
  * swap2 rules. Please see the assignment specification and game rules for
  * further details.
  **/
-enum input_result first_round(struct game* thegame)
-{
-        return IR_FAILURE;
+enum input_result first_round(struct game* thegame) {
+  return IR_FAILURE;
 }
