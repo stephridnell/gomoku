@@ -9,25 +9,28 @@
 #include "gomoku.h"
 
 int main(void) {
-  char menuInput[LINE_LENGTH + EXTRA_CHARS];
+
   int selection;
 
  do {
 
    print_menu();
 
-   selection = get_menu_input(menuInput);
+   selection = get_menu_input();
 
    switch (selection) {
+  
      case PLAY_GAME:
       printf("play game\n");
       break;
+  
      case EXIT_GAME:
       break;
+  
      default: 
       error_print("invalid menu item selected\n");
       break;
-
+  
  } 
   
 } while (selection != EXIT_GAME);

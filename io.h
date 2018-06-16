@@ -89,6 +89,6 @@ void print_menu(void);
 
 void get_input(char* inputValue);
 
-int get_menu_input(char* inputValue);
+int get_menu_input(void);
 
 #endif /* include guard for the io module */
