@@ -22,22 +22,21 @@
  * also ensure the board is coorectly initialised through a call to
  * init_board().
  **/
-enum input_result init_game(struct game* newgame, struct player players[]) {
-  return IR_FAILURE;
+enum input_result init_game(struct game* newgame) {
+        return IR_FAILURE;
 }
 
 /**
- * manages the main game loop - calls init_player to initialise the players and
+ * manages the main game loop - calls init_game to initialise the game and
  * then loops and calls take_turn for the current player and swaps players until
  * a player has won the game
  **/
 void play_game(void) {
-  /* the game struct that holds the data on the game state */
-  struct game curgame;
-  /* init the game struct */
-  /* the main game loop */
-  /* swap the game pointers */
-  /* return the winner */
+        /* the game struct that holds the data on the game state */
+        struct game curgame;
+        /* init the game struct */
+        /* the main game loop */
+        /* swap the game pointers */
 }
 
 /**
@@ -57,5 +56,5 @@ void swap_players(struct player** first, struct player** second) {
  * further details.
  **/
 enum input_result first_round(struct game* thegame) {
-  return IR_FAILURE;
+        return IR_FAILURE;
 }
