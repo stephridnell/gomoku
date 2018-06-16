@@ -24,7 +24,7 @@ int main(void) {
    switch (selection) {
   
     case PLAY_GAME:
-      printf("play game\n");
+      play_game();
       break;
   
     case EXIT_GAME:

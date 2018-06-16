@@ -23,6 +23,7 @@
  * init_board().
  **/
 enum input_result init_game(struct game* newgame) {
+  printf("init game");
   return IR_FAILURE;
 }
 
@@ -33,8 +34,9 @@ enum input_result init_game(struct game* newgame) {
  **/
 void play_game(void) {
   /* the game struct that holds the data on the game state */
-  /* struct game currentGame; */
+  struct game currentGame;
   /* init the game struct */
+  init_game(&currentGame);
   /* the main game loop */
   /* swap the game pointers */
 }
