@@ -58,11 +58,3 @@ void swap_players(struct player** first, struct player** second) {
 enum input_result first_round(struct game* thegame) {
   return IR_FAILURE;
 }
-
-void print_menu(void) {
-  normal_print("Welcome to Gomoku \n");
-  normal_print("==================\n");
-  normal_print("1) play the game\n");
-  normal_print("2) quit\n");
-  normal_print("Please enter your choice:\n");
-}

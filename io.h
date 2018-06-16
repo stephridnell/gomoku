@@ -82,4 +82,7 @@ int error_print(const char*, ...);
 int normal_print(const char*, ...);
 
 void display_board(board);
+
+void print_menu(void);
+
 #endif /* include guard for the io module */

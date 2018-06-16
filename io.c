@@ -71,3 +71,11 @@ int normal_print(const char* format, ...) {
   va_end(argvec);
   return charsprinted;
 }
+
+void print_menu(void) {
+  normal_print("Welcome to Gomoku \n");
+  normal_print("==================\n");
+  normal_print("1) play the game\n");
+  normal_print("2) quit\n");
+  normal_print("Please enter your choice:\n");
+}
