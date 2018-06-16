@@ -20,15 +20,25 @@ int main(void) {
 
    switch (selection) {
   
-     case PLAY_GAME:
+    case PLAY_GAME:
       printf("play game\n");
       break;
   
-     case EXIT_GAME:
+    case EXIT_GAME:
+      break;
+
+    case TOO_LONG:
+      too_long_error();
+      invalid_menu_selection_error();
+      break;
+
+    case NON_INT:
+      non_int_error();
+      invalid_menu_selection_error();
       break;
   
-     default: 
-      error_print("invalid menu item selected\n");
+    default: 
+      invalid_menu_selection_error();
       break;
   
  } 

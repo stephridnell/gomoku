@@ -7,6 +7,7 @@
  * study period 2, 2018.
  *****************************************************************************/
 #include "io.h"
+#include "error.h"
 #include <limits.h>
 
 /**
@@ -80,8 +81,8 @@ void print_menu(void) {
   normal_print("Please enter your choice:\n");
 }
 
-void get_input(char* inputValue) {
-  fgets(inputValue, sizeof(inputValue), stdin);
+void get_input(char* inputValue, int size) {
+  fgets(inputValue, size, stdin);
 
   /**
   * Code courtesy of Paul Miller, week 3 sample material
@@ -103,9 +104,19 @@ void get_input(char* inputValue) {
 }
 
 int get_menu_input(void) {
+  int inputLength = 0;
   char menuInput[LINE_LENGTH + EXTRA_CHARS];
 
-  get_input(menuInput);
+  get_input(menuInput, sizeof(menuInput));
+
+  /* error handling */
+  if (menuInput[0] < 48 || menuInput[0] > 57) {
+    return NON_INT;
+  }
+  inputLength = strlen(menuInput);
+  if (inputLength > 1) {
+    return TOO_LONG;
+  }
 
   return menuInput[0];
 }

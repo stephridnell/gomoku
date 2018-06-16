@@ -89,7 +89,7 @@ void display_board(board);
 
 void print_menu(void);
 
-void get_input(char* inputValue);
+void get_input(char* inputValue, int size);
 
 int get_menu_input(void);
 

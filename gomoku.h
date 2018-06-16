@@ -8,6 +8,7 @@
  *****************************************************************************/
 #include "game.h"
 #include "io.h"
+#include "error.h"
 #include "player.h"
 #include "shared.h"
 #include <stdio.h>
