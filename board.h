@@ -20,8 +20,8 @@
 #define BOARD_H
 /* the gomoku board is a 19 x 19 cell board but we only use 15x15 of it so
  * that's all we'll keep track of*/
-#define BOARDHEIGHT 15
-#define BOARDWIDTH BOARDHEIGHT
+#define BOARD_HEIGHT 15
+#define BOARD_WIDTH BOARD_HEIGHT
 
 /* a cell on the board */
 enum cell {
@@ -33,7 +33,7 @@ enum cell {
 
 /* rename an array or arrays of type enum cell to be a board - note that under
  * the hood it is still an array of ints and will behave accordingly */
-typedef enum cell board[BOARDHEIGHT][BOARDWIDTH];
+typedef enum cell board[BOARD_HEIGHT][BOARD_WIDTH];
 
 /* public functions advertised for this module. You should add additional
  * functions for the managing of the game board */

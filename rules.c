@@ -21,14 +21,14 @@
  * there is a winning numinrow tokens that matches the player's token. If there
  * is, return TRUE
  **/
-BOOLEAN is_winner(const struct player* curplayer) {
+BOOLEAN is_winner(const struct player* currentPlayer) {
   return FALSE;
 }
 
 /**
  * check if a move is valid. It is valid if the cell specified is empty
  **/
-BOOLEAN move_is_valid(const struct player* curplayer, const struct coordinate* curmove) {
+BOOLEAN move_is_valid(const struct player* currentPlayer, const struct coordinate* curmove) {
   return FALSE;
 }
 

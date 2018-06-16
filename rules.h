@@ -24,7 +24,7 @@ struct game;
 struct player;
 
 /* the number in a row required for a win */
-#define NUMINROW 5
+#define NUM_IN_ROW 5
 
 /* coordinate is an x-y pair that specifies a location on the board */
 struct coordinate {

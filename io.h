@@ -37,29 +37,29 @@ enum input_result {
 };
 
 /**
- * These constants are related to i/o operations in general. LINELEN is used to
+ * These constants are related to i/o operations in general. LINE_LENGTH is used to
  * specify a default line length which is the stand unix terminal width. This is
- * used so that output will display the same on everyone's terminal. EXTRACHARS
+ * used so that output will display the same on everyone's terminal. EXTRA_CHARS
  * are the two extra chars stored by a successful call to fgets. Finally DECIMAL
  * is used with strtol to specify that the numerical string being processed
  * should be treated as a DECIMAL number.
  **/
-#define LINELEN 80
-#define EXTRACHARS 2
+#define LINE_LENGTH 80
+#define EXTRA_CHARS 2
 #define DECIMAL 10
 
 /* the number of menu items in the main menu */
 #define NUM_MENU_ITEMS 3
 
 /* colour constants - these are used for turning on and off the red and white
- * colours for displaying the game board. REDCOLOR sets the current colour to
- * red, WHITECOLOR sets the current colour to white and RESETCOLOR resets the
+ * colours for displaying the game board. RED_COLOR sets the current colour to
+ * red, WHITE_COLOR sets the current colour to white and RESET_COLOR resets the
  * colour to the default colours for the terminal. You are advised to simply use
  * the game_tokens global variable which has predefined constants for each
  * colour */
-#define REDCOLOR "\033[0;31m"
-#define WHITECOLOR "\033[37;1m"
-#define RESETCOLOR "\033[0;0m"
+#define RED_COLOR "\033[0;31m"
+#define WHITE_COLOR "\033[37;1m"
+#define RESET_COLOR "\033[0;0m"
 
 /**
  *  the number of token types - empty, red, white, invalid

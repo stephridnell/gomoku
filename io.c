@@ -22,7 +22,7 @@
  * the C_INVALID constant
  **/
 const char* game_tokens[NUM_TOKEN_TYPES] = {
-  " ", REDCOLOR "o" RESETCOLOR, WHITECOLOR "o" RESETCOLOR, NULL
+  " ", RED_COLOR "o" RESET_COLOR, WHITE_COLOR "o" RESET_COLOR, NULL
 };
 
 /**
@@ -50,11 +50,11 @@ int error_print(const char* format, ...) {
   va_start(argvec, format);
   /* change the color to red and print the Error preambe for an error
    * message */
-  charsPrinted = fprintf(stderr, REDCOLOR "Error: ");
+  charsPrinted = fprintf(stderr, RED_COLOR "Error: ");
   /* print the output required by the user */
   charsPrinted += vfprintf(stderr, format, argvec);
   /* reset back to the default colour */
-  charsPrinted += fprintf(stderr, RESETCOLOR);
+  charsPrinted += fprintf(stderr, RESET_COLOR);
   /* stop using the stdarg library */
   va_end(argvec);
   return charsPrinted;
@@ -81,7 +81,7 @@ void print_menu(void) {
 }
 
 void get_input(char* inputValue) {
-  fgets(inputValue, LINELEN + EXTRACHARS, stdin);
+  fgets(inputValue, LINE_LENGTH + EXTRA_CHARS, stdin);
 
   /**
   * Code courtesy of Paul Miller, week 3 sample material

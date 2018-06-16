@@ -18,7 +18,7 @@
  * initialises the player passed in so that it has the token specified. You
  * should also prompt the user for this name
  **/
-enum input_result init_player(struct player* curplayer, enum cell token, struct game* thegame, int playernum) {
+enum input_result init_player(struct player* currentPlayer, enum cell token, struct game* theGame, int playerNumber) {
   return IR_FAILURE;
 }
 
@@ -28,6 +28,6 @@ enum input_result init_player(struct player* curplayer, enum cell token, struct 
  * display an error message but if it is valid return a IR_SUCCESS result. If a
  * user has chosen to quit the game, return IR_RTM.
  **/
-enum input_result take_turn(struct player* curplayer) {
+enum input_result take_turn(struct player* currentPlayer) {
   return IR_FAILURE;
 }

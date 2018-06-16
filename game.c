@@ -33,7 +33,7 @@ enum input_result init_game(struct game* newgame) {
  **/
 void play_game(void) {
   /* the game struct that holds the data on the game state */
-  /* struct game curgame; */
+  /* struct game currentGame; */
   /* init the game struct */
   /* the main game loop */
   /* swap the game pointers */
@@ -55,6 +55,6 @@ void swap_players(struct player** first, struct player** second) {
  * swap2 rules. Please see the assignment specification and game rules for
  * further details.
  **/
-enum input_result first_round(struct game* thegame) {
+enum input_result first_round(struct game* theGame) {
   return IR_FAILURE;
 }

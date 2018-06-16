@@ -28,7 +28,7 @@
  **/
 struct game {
   struct player players[NUM_PLAYERS];
-  board gameboard;
+  board gameBoard;
   struct player* current, *other;
 };
 
