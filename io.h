@@ -50,6 +50,8 @@ enum input_result {
 
 /* the number of menu items in the main menu */
 #define NUM_MENU_ITEMS 3
+
+/* ascii codes for corresponding menu items */
 #define PLAY_GAME 49
 #define EXIT_GAME 50
 

@@ -81,7 +81,7 @@ void print_menu(void) {
 }
 
 void get_input(char* inputValue) {
-  fgets(inputValue, LINE_LENGTH + EXTRA_CHARS, stdin);
+  fgets(inputValue, sizeof(inputValue), stdin);
 
   /**
   * Code courtesy of Paul Miller, week 3 sample material
