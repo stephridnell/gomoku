@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <ctype.h>
 
 /**
  * This is the header file for the main module. It really just pulls together

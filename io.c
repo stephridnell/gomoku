@@ -101,3 +101,8 @@ void get_input(char* inputValue) {
   **/
   inputValue[strlen(inputValue)-1] = 0;
 }
+
+int get_menu_input(char* inputValue) {
+  get_input(inputValue);
+  return inputValue[0];
+}

@@ -12,15 +12,31 @@
  * The main function - the main entry point into your program
  **/
 int main(void) {
-  char mainMenuSelection[LINE_LENGTH + EXTRA_CHARS];
+  char menuInput[LINE_LENGTH + EXTRA_CHARS];
+  int selection;
   /**
    * Display the menu
   **/
-  print_menu();
 
-  get_input(mainMenuSelection);
+ do {
 
-  normal_print("You have selected %s\n",mainMenuSelection);
+   print_menu();
+
+   selection = get_menu_input(menuInput);
+
+   switch (selection) {
+     case PLAY_GAME:
+      printf("play game\n");
+      break;
+     case EXIT_GAME:
+      break;
+     default: 
+      error_print("invalid menu item selected\n");
+      break;
+ } 
+  
+} while (selection != EXIT_GAME);
+
 
   /* you should treat the comments in this function as a hint on how to 
    * get started. You should start by getting a menu working that behaves

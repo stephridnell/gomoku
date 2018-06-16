@@ -50,6 +50,8 @@ enum input_result {
 
 /* the number of menu items in the main menu */
 #define NUM_MENU_ITEMS 3
+#define PLAY_GAME 49
+#define EXIT_GAME 50
 
 /* colour constants - these are used for turning on and off the red and white
  * colours for displaying the game board. RED_COLOR sets the current colour to
@@ -85,6 +87,8 @@ void display_board(board);
 
 void print_menu(void);
 
-void get_input(char* value);
+void get_input(char* inputValue);
+
+int get_menu_input(char* inputValue);
 
 #endif /* include guard for the io module */
