@@ -23,7 +23,7 @@
  * init_board().
  **/
 enum input_result init_game(struct game* newgame) {
-        return IR_FAILURE;
+  return IR_FAILURE;
 }
 
 /**
@@ -32,11 +32,11 @@ enum input_result init_game(struct game* newgame) {
  * a player has won the game
  **/
 void play_game(void) {
-        /* the game struct that holds the data on the game state */
-        struct game curgame;
-        /* init the game struct */
-        /* the main game loop */
-        /* swap the game pointers */
+  /* the game struct that holds the data on the game state */
+  /* struct game curgame; */
+  /* init the game struct */
+  /* the main game loop */
+  /* swap the game pointers */
 }
 
 /**
@@ -56,5 +56,13 @@ void swap_players(struct player** first, struct player** second) {
  * further details.
  **/
 enum input_result first_round(struct game* thegame) {
-        return IR_FAILURE;
+  return IR_FAILURE;
+}
+
+void print_menu(void) {
+  normal_print("Welcome to Gomoku \n");
+  normal_print("==================\n");
+  normal_print("1) play the game\n");
+  normal_print("2) quit\n");
+  normal_print("Please enter your choice:\n");
 }
