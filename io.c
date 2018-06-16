@@ -73,6 +73,9 @@ int normal_print(const char* format, ...) {
   return charsPrinted;
 }
 
+/**
+ * print menu
+ **/
 void print_menu(void) {
   normal_print("\n");
   normal_print("Welcome to Gomoku \n");
@@ -82,6 +85,9 @@ void print_menu(void) {
   normal_print("Please enter your choice:\n");
 }
 
+/**
+ * gets the user input and does buffer handling
+ **/
 void get_input(char* inputValue, int size) {
   fgets(inputValue, size, stdin);
 
@@ -104,6 +110,9 @@ void get_input(char* inputValue, int size) {
   inputValue[strlen(inputValue)-1] = 0;
 }
 
+/**
+ * function to get the users menu selection and handle the input validation
+ **/
 int get_menu_input(void) {
   int inputLength = 0;
   char menuInput[LINE_LENGTH + EXTRA_CHARS];

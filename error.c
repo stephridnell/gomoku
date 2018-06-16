@@ -6,14 +6,23 @@
 #include "error.h"
 #include "io.h"
 
+/**
+ * Prints a messge that the input entered was too long
+ **/
 void too_long_error(void) {
   error_print("input entered is too long. Please try again.\n");
 }
 
+/**
+ * Prints a message that the input entered was not numeric
+ **/
 void non_int_error(void) {
   error_print("input was not numeric. Please try again.\n");
 }
 
+/**
+ * Prints a message that the menu input was invalid
+ **/
 void invalid_menu_selection_error(void) {
   error_print("invalid menu item selected\n");
 }

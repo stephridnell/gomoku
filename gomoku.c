@@ -8,6 +8,9 @@
  *****************************************************************************/
 #include "gomoku.h"
 
+/**
+ * The main function - the main entry point into your program
+ **/
 int main(void) {
 
   int selection;
