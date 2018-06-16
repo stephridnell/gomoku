@@ -85,4 +85,6 @@ void display_board(board);
 
 void print_menu(void);
 
+void get_input(char* value);
+
 #endif /* include guard for the io module */

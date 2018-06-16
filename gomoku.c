@@ -12,10 +12,15 @@
  * The main function - the main entry point into your program
  **/
 int main(void) {
+  char mainMenuSelection[LINELEN + EXTRACHARS];
   /**
    * Display the menu
-  */
+  **/
   print_menu();
+  
+  get_input(mainMenuSelection);
+
+  normal_print("You have selected %s\n",mainMenuSelection);
 
   /* you should treat the comments in this function as a hint on how to 
    * get started. You should start by getting a menu working that behaves
