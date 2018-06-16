@@ -74,6 +74,7 @@ int normal_print(const char* format, ...) {
 }
 
 void print_menu(void) {
+  normal_print("\n");
   normal_print("Welcome to Gomoku \n");
   normal_print("==================\n");
   normal_print("1) play the game\n");
