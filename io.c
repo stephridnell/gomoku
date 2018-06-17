@@ -85,15 +85,16 @@ void print_menu(void) {
   normal_print("Please enter your choice:\n");
 }
 
-/**
- * gets the user input and does buffer handling
- **/
+/* gets the user input and does buffer handling */
 enum input_result get_input(char* inputValue, int size) {
   fgets(inputValue, size, stdin);
 
-  /**
-  * Code courtesy of Paul Miller, week 3 sample material
-  **/
+  if (inputValue[0] == '\n' || feof(stdin)) {
+    read_rest_of_line();
+    return IR_RTM;
+  }
+
+  /* Code courtesy of Paul Miller, week 3 sample material */
 
   /**
   * test if the newline character was stored - if 
@@ -113,16 +114,14 @@ enum input_result get_input(char* inputValue, int size) {
   return IR_SUCCESS;
 }
 
-/**
- * function to get the users menu selection and handle the input validation
- **/
+/* function to get the users menu selection and handle the input validation */
 int get_menu_input(void) {
   enum input_result ioResult;
   char menuInput[LINE_LENGTH + EXTRA_CHARS];
 
   ioResult = get_input(menuInput, sizeof(menuInput));
 
-  if (ioResult == FALSE) {
+  if (!ioResult) {
     too_long_error();
   } else if (menuInput[0] < 48 || menuInput[0] > 57) {
     /* check if input is numeric */

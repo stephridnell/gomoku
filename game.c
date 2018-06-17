@@ -24,6 +24,7 @@
  **/
 enum input_result init_game(struct game* newGame) {
   struct player playerOne, playerTwo;
+  enum input_result inputResult;
 
   /* assign random tokens */
   int playerOneToken = rand() % 2;
@@ -31,17 +32,25 @@ enum input_result init_game(struct game* newGame) {
   playerOneToken++;
   
   /* init players */
-  init_player(
+  inputResult = init_player(
     &playerOne,
     playerOneToken == 1 ? C_RED : C_WHITE,
     newGame, 1
   );
-  
-  init_player(
+
+  if (inputResult == IR_RTM) {
+    printf("return to menu?");
+  }
+
+  inputResult = init_player(
     &playerTwo,
     playerTwoToken == 1 ? C_RED : C_WHITE,
     newGame, 2
   );
+
+  if (inputResult == IR_RTM) {
+    printf("return to menu?");
+  }
 
   return IR_FAILURE;
 }
