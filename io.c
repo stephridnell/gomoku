@@ -88,7 +88,7 @@ void print_menu(void) {
 /**
  * gets the user input and does buffer handling
  **/
-int get_input(char* inputValue, int size) {
+enum input_result get_input(char* inputValue, int size) {
   fgets(inputValue, size, stdin);
 
   /**
@@ -117,7 +117,7 @@ int get_input(char* inputValue, int size) {
  * function to get the users menu selection and handle the input validation
  **/
 int get_menu_input(void) {
-  int ioResult;
+  enum input_result ioResult;
   char menuInput[LINE_LENGTH + EXTRA_CHARS];
 
   ioResult = get_input(menuInput, sizeof(menuInput));
