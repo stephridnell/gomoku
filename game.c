@@ -22,8 +22,12 @@
  * also ensure the board is coorectly initialised through a call to
  * init_board().
  **/
-enum input_result init_game(struct game* newgame) {
-  printf("init game");
+enum input_result init_game(struct game* newGame) {
+  struct player playerOne, playerTwo;
+  
+  init_player(&playerOne, 1, newGame, 1);
+  init_player(&playerTwo, 2, newGame, 2);
+
   return IR_FAILURE;
 }
 

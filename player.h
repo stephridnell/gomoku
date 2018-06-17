@@ -39,7 +39,7 @@ struct player {
 /**
  * publicly callable functiohs from this module
  **/
-enum input_result init_player(struct player*, enum cell, struct game*, int);
+enum input_result init_player(struct player* currentPlayer, enum cell token, struct game* theGame, int playerNumber);
 
 enum input_result take_turn(struct player*);
 

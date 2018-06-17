@@ -19,7 +19,13 @@
  * should also prompt the user for this name
  **/
 enum input_result init_player(struct player* currentPlayer, enum cell token, struct game* theGame, int playerNumber) {
-  return IR_FAILURE;
+  enum input_result ioResult = IR_FAILURE;
+  char playerName[NAME_LENGTH + EXTRA_CHARS];
+  while (!ioResult) {
+    normal_print("Enter name of player %d: ", playerNumber);
+    ioResult = get_input(playerName, sizeof(playerName));
+  }
+  return ioResult;
 }
 
 /**
