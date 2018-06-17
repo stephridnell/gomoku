@@ -123,12 +123,10 @@ int get_menu_input(void) {
   ioResult = get_input(menuInput, sizeof(menuInput));
 
   if (ioResult == FALSE) {
-    return TOO_LONG;
-  }
-
-  /* check if input is numeric */
-  if (menuInput[0] < 48 || menuInput[0] > 57) {
-    return NON_INT;
+    too_long_error();
+  } else if (menuInput[0] < 48 || menuInput[0] > 57) {
+    /* check if input is numeric */
+    non_int_error();
   }
 
   return menuInput[0];

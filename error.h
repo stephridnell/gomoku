@@ -7,10 +7,6 @@
 #ifndef ERROR_H
 #define ERROR_H
 
-/* define error codes */
-#define TOO_LONG -1
-#define NON_INT -2
-
 void too_long_error(void);
 
 void non_int_error(void);

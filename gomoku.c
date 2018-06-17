@@ -29,16 +29,6 @@ int main(void) {
   
     case EXIT_GAME:
       break;
-
-    case TOO_LONG:
-      too_long_error();
-      invalid_menu_selection_error();
-      break;
-
-    case NON_INT:
-      non_int_error();
-      invalid_menu_selection_error();
-      break;
   
     default: 
       invalid_menu_selection_error();
