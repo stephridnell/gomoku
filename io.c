@@ -88,7 +88,7 @@ void print_menu(void) {
 /**
  * gets the user input and does buffer handling
  **/
-void get_input(char* inputValue, int size) {
+int get_input(char* inputValue, int size) {
   fgets(inputValue, size, stdin);
 
   /**
@@ -98,34 +98,37 @@ void get_input(char* inputValue, int size) {
   /**
   * test if the newline character was stored - if 
   * it was not then we have buffer overflow and therefore
-  * must clear the buffer 
+  * must clear the buffer and return IR FAILURE
   **/
   if(inputValue[strlen(inputValue) - 1] != '\n') {
     read_rest_of_line();
+    return IR_FAILURE;
   }
 
   /** 
   * remove the newline character as it is no longer needed
+  * then return IR SUCCESS
   **/
   inputValue[strlen(inputValue)-1] = 0;
+  return IR_SUCCESS;
 }
 
 /**
  * function to get the users menu selection and handle the input validation
  **/
 int get_menu_input(void) {
-  int inputLength = 0;
+  int ioResult;
   char menuInput[LINE_LENGTH + EXTRA_CHARS];
 
-  get_input(menuInput, sizeof(menuInput));
+  ioResult = get_input(menuInput, sizeof(menuInput));
 
-  /* error handling */
+  if (ioResult == FALSE) {
+    return TOO_LONG;
+  }
+
+  /* check if input is numeric */
   if (menuInput[0] < 48 || menuInput[0] > 57) {
     return NON_INT;
-  }
-  inputLength = strlen(menuInput);
-  if (inputLength > 1) {
-    return TOO_LONG;
   }
 
   return menuInput[0];
