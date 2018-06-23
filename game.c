@@ -55,12 +55,6 @@ enum input_result init_game(struct game* newGame) {
     printf("return to menu?");
   }
 
-  /* TODO - remove logging */
-  printf("\nPlayer One Token: %u\n", playerOne.token);
-  printf("Player One Name: %s\n\n", playerOne.name);
-  printf("Player Two Token: %u\n", playerTwo.token);
-  printf("Player Two Token: %s\n\n", playerTwo.name);
-
   /* set the current and other player according to token */
   newGame->players[0] = playerOne;
   newGame->players[1] = playerTwo;

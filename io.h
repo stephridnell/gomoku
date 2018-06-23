@@ -101,6 +101,6 @@ BOOLEAN is_int(const char * s);
 
 void print_line(void);
 
-void print_bar(void);
+void print_bar(char* symbol);
 
 #endif /* include guard for the io module */

@@ -162,10 +162,10 @@ void display_board(board gameBoard) {
     normal_print("|%*d", CELL_WIDTH, x);
   }
   normal_print("|");
-  print_bar();
 
   /* print body */
   for (x = BOARD_HEIGHT - 1; x >= 0; x--) {
+    print_bar("-");
     /* print row header */
     normal_print("%-*d", CELL_WIDTH, x + 1);
     /* print cells */
@@ -173,8 +173,8 @@ void display_board(board gameBoard) {
       normal_print("|%*s", CELL_WIDTH, game_tokens[gameBoard[y][x]]);
     }
     normal_print("|");
-    print_bar();
   }
+  print_bar("=");
 }
 
 /* function to print a new line */
@@ -182,12 +182,12 @@ void print_line(void) {
   normal_print("\n");
 }
 
-/* function to print a horizontal bar */
-void print_bar(void) {
+/* function to print a horizontal bar with a custom symbol */
+void print_bar(char* symbol) {
   int i;
   print_line();
   for (i = 0; i < ((BOARD_WIDTH + 1) * (CELL_WIDTH + 1)); i++) {
-    normal_print("-");
+    normal_print("%s", symbol);
   }
   print_line();
 }
