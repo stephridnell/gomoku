@@ -17,5 +17,12 @@
 /**
  * initialise the board to be an empty board
  **/
-void init_board(board aboard) {
+void init_board(board theBoard) {
+  int x, y;
+
+	for(y = 0; y < BOARD_WIDTH; y++) {
+		for(x = 0; x < BOARD_HEIGHT; x++) {
+			theBoard[y][x] = C_EMPTY;
+		}
+	}
 }

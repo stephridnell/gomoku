@@ -52,6 +52,8 @@ enum input_result init_game(struct game* newGame) {
     printf("return to menu?");
   }
 
+  init_board(newGame->gameBoard);
+  
   return IR_FAILURE;
 }
 
