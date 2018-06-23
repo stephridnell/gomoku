@@ -9,6 +9,7 @@
 #include "io.h"
 #include "error.h"
 #include <limits.h>
+#include <ctype.h>
 
 /**
  * this file has the implementation functions for input / output. All ouput
@@ -130,11 +131,21 @@ int get_menu_input(void) {
   if (!ioResult) {
     too_long_error();
     return ioResult;
-  } else if (menuInput[0] < 48 || menuInput[0] > 57) {
-    /* check if input is numeric */
+  } else if (!is_int(menuInput)) {
     non_int_error();
     return ioResult;
   }
 
   return menuInput[0];
+}
+
+/* is_int() function from Paul Miller - week 3 lecture material */
+BOOLEAN is_int(const char * s) {
+  while(*s) {
+    if(!isdigit(*s)) {
+      return FALSE;
+    }
+    ++s;
+  }
+  return TRUE;
 }

@@ -94,4 +94,6 @@ enum input_result get_input(char* inputValue, int size);
 
 int get_menu_input(void);
 
+BOOLEAN is_int(const char * s);
+
 #endif /* include guard for the io module */
