@@ -45,6 +45,7 @@ enum input_result {
  * should be treated as a DECIMAL number.
  **/
 #define LINE_LENGTH 80
+#define MENU_SELECTION_LENGTH 1
 #define EXTRA_CHARS 2
 #define DECIMAL 10
 

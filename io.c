@@ -88,8 +88,14 @@ void print_menu(void) {
 /* gets the user input and does buffer handling */
 enum input_result get_input(char* inputValue, int size) {
   fgets(inputValue, size, stdin);
+  
+  /* if the user just pressed enter - return rtm */
+  if (inputValue[0] == '\n') {
+    return IR_RTM;
+  }
 
-  if (inputValue[0] == '\n' || feof(stdin)) {
+  /* if crtl+D detected - read rest of line and return rtm */
+  if (feof(stdin)) {
     read_rest_of_line();
     return IR_RTM;
   }
@@ -117,15 +123,17 @@ enum input_result get_input(char* inputValue, int size) {
 /* function to get the users menu selection and handle the input validation */
 int get_menu_input(void) {
   enum input_result ioResult;
-  char menuInput[LINE_LENGTH + EXTRA_CHARS];
+  char menuInput[MENU_SELECTION_LENGTH + EXTRA_CHARS];
 
   ioResult = get_input(menuInput, sizeof(menuInput));
 
   if (!ioResult) {
     too_long_error();
+    return ioResult;
   } else if (menuInput[0] < 48 || menuInput[0] > 57) {
     /* check if input is numeric */
     non_int_error();
+    return ioResult;
   }
 
   return menuInput[0];
