@@ -155,7 +155,7 @@ void display_board(board gameBoard) {
   int x, y;
 
   /* print the space in the top left corner */
-  normal_print("%-2s", "");
+  normal_print("%-*s", CELL_WIDTH, "");
   
   /* print header */
   for (x = 1; x <= BOARD_WIDTH; x++) {
@@ -167,7 +167,7 @@ void display_board(board gameBoard) {
   /* print body */
   for (x = BOARD_HEIGHT - 1; x >= 0; x--) {
     /* print row header */
-    normal_print("%*d", CELL_WIDTH, x + 1);
+    normal_print("%-*d", CELL_WIDTH, x + 1);
     /* print cells */
     for (y = BOARD_HEIGHT - 1; y >= 0; y--) {
       normal_print("|%*s", CELL_WIDTH, game_tokens[gameBoard[y][x]]);
