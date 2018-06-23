@@ -24,8 +24,8 @@
  **/
 enum input_result init_game(struct game* newGame) {
   struct player playerOne, playerTwo;
+  int firstPlayer,secondPlayer;
   enum input_result inputResult;
-  int i;
 
   /* assign random tokens */
   int playerOneToken = rand() % 2;
@@ -55,17 +55,15 @@ enum input_result init_game(struct game* newGame) {
     printf("return to menu?");
   }
 
-  /* set the current and other player according to token */
+  /* set the game players */
   newGame->players[0] = playerOne;
   newGame->players[1] = playerTwo;
 
-  for (i = 0; i < NUM_PLAYERS; ++i) {
-    if (newGame->players[i].token == 1) {
-      newGame->current = &newGame->players[i];
-    } else {
-      newGame->other = &newGame->players[i];
-    }
-  }
+  /* set the current and other player according to rand */
+  firstPlayer = rand() % 2;
+  secondPlayer = 1 - playerOneToken + 1;
+  newGame->current = &newGame->players[firstPlayer];
+  newGame->other = &newGame->players[secondPlayer];
 
   init_board(newGame->gameBoard);
 
@@ -83,7 +81,7 @@ void play_game(void) {
   /* init the game struct */
   init_game(&currentGame);
   /* the main game loop */
-  normal_print("%s plays first.\n", currentGame.current->name);
+  normal_print("%s plays first.\n\n", currentGame.current->name);
   display_board(currentGame.gameBoard);
   /* swap the game pointers */
 }

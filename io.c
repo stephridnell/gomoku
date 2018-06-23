@@ -24,7 +24,7 @@
  * the C_INVALID constant
  **/
 const char* game_tokens[NUM_TOKEN_TYPES] = {
-  " ", RED_COLOR "o" RESET_COLOR, WHITE_COLOR "o" RESET_COLOR, NULL
+  " ", RED_COLOR "x" RESET_COLOR, WHITE_COLOR "o" RESET_COLOR, NULL
 };
 
 /**
@@ -83,7 +83,7 @@ void print_menu(void) {
   normal_print("==================\n");
   normal_print("1) play the game\n");
   normal_print("2) quit\n");
-  normal_print("Please enter your choice:\n");
+  normal_print("Please enter your choice: ");
 }
 
 /* gets the user input and does buffer handling */
@@ -153,6 +153,9 @@ BOOLEAN is_int(const char * s) {
 /* function to display the board */
 void display_board(board gameBoard) {
   int x, y;
+
+  /* print line to make sure board appears on next line */
+  print_line();
 
   /* print the space in the top left corner */
   normal_print("%-*s", CELL_WIDTH, "");

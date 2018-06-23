@@ -23,8 +23,7 @@ enum input_result init_player(struct player* currentPlayer, enum cell token, str
   enum input_result ioResult = IR_FAILURE;
 
   while (!ioResult) {
-    normal_print("\n");
-    normal_print("Enter name of player %d: ", playerNumber);
+    normal_print("Please enter the name for player %d: ", playerNumber);
 
     ioResult = get_input(currentPlayer->name, sizeof(currentPlayer->name));
   
