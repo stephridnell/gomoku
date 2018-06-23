@@ -21,19 +21,21 @@
  **/
 enum input_result init_player(struct player* currentPlayer, enum cell token, struct game* theGame, int playerNumber) {
   enum input_result ioResult = IR_FAILURE;
-  char playerName[NAME_LENGTH + EXTRA_CHARS];
 
   while (!ioResult) {
     normal_print("\n");
     normal_print("Enter name of player %d: ", playerNumber);
 
-    ioResult = get_input(playerName, sizeof(playerName));
+    ioResult = get_input(currentPlayer->name, sizeof(currentPlayer->name));
   
     if (!ioResult) {
       too_long_error();
     }
 
   }
+
+  currentPlayer->token = token;
+  currentPlayer->currentGame = theGame;
   
   return ioResult;
 }

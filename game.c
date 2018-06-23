@@ -25,6 +25,7 @@
 enum input_result init_game(struct game* newGame) {
   struct player playerOne, playerTwo;
   enum input_result inputResult;
+  int i;
 
   /* assign random tokens */
   int playerOneToken = rand() % 2;
@@ -38,6 +39,7 @@ enum input_result init_game(struct game* newGame) {
     newGame, 1
   );
 
+  /* TODO implement the return to menu stuff */
   if (inputResult == IR_RTM) {
     printf("return to menu?");
   }
@@ -48,12 +50,31 @@ enum input_result init_game(struct game* newGame) {
     newGame, 2
   );
 
+  /* TODO implement the return to menu stuff */
   if (inputResult == IR_RTM) {
     printf("return to menu?");
   }
 
+  /* TODO - remove logging */
+  printf("\nPlayer One Token: %u\n", playerOne.token);
+  printf("Player One Name: %s\n\n", playerOne.name);
+  printf("Player Two Token: %u\n", playerTwo.token);
+  printf("Player Two Token: %s\n\n", playerTwo.name);
+
+  /* set the current and other player according to token */
+  newGame->players[0] = playerOne;
+  newGame->players[1] = playerTwo;
+
+  for (i = 0; i < NUM_PLAYERS; ++i) {
+    if (newGame->players[i].token == 1) {
+      newGame->current = &newGame->players[i];
+    } else {
+      newGame->other = &newGame->players[i];
+    }
+  }
+
   init_board(newGame->gameBoard);
-  
+
   return IR_FAILURE;
 }
 
