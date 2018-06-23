@@ -66,6 +66,9 @@ enum input_result {
 #define WHITE_COLOR "\033[37;1m"
 #define RESET_COLOR "\033[0;0m"
 
+/* width of each cell on the board */
+#define CELL_WIDTH 2
+
 /**
  *  the number of token types - empty, red, white, invalid
  **/
@@ -95,5 +98,9 @@ enum input_result get_input(char* inputValue, int size);
 int get_menu_input(void);
 
 BOOLEAN is_int(const char * s);
+
+void print_line(void);
+
+void print_bar(void);
 
 #endif /* include guard for the io module */

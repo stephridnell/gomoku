@@ -89,6 +89,8 @@ void play_game(void) {
   /* init the game struct */
   init_game(&currentGame);
   /* the main game loop */
+  normal_print("%s plays first.\n", currentGame.current->name);
+  display_board(currentGame.gameBoard);
   /* swap the game pointers */
 }
 

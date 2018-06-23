@@ -139,7 +139,7 @@ int get_menu_input(void) {
   return menuInput[0];
 }
 
-/* is_int() function from Paul Miller - week 3 lecture material */
+/* is_int() function from Paul Miller - week 3 sample material */
 BOOLEAN is_int(const char * s) {
   while(*s) {
     if(!isdigit(*s)) {
@@ -148,4 +148,46 @@ BOOLEAN is_int(const char * s) {
     ++s;
   }
   return TRUE;
+}
+
+/* function to display the board */
+void display_board(board gameBoard) {
+  int x, y;
+
+  /* print the space in the top left corner */
+  normal_print("%-2s", "");
+  
+  /* print header */
+  for (x = 1; x <= BOARD_WIDTH; x++) {
+    normal_print("|%*d", CELL_WIDTH, x);
+  }
+  normal_print("|");
+  print_bar();
+
+  /* print body */
+  for (x = BOARD_HEIGHT - 1; x >= 0; x--) {
+    /* print row header */
+    normal_print("%*d", CELL_WIDTH, x + 1);
+    /* print cells */
+    for (y = BOARD_HEIGHT - 1; y >= 0; y--) {
+      normal_print("|%*s", CELL_WIDTH, game_tokens[gameBoard[y][x]]);
+    }
+    normal_print("|");
+    print_bar();
+  }
+}
+
+/* function to print a new line */
+void print_line(void) {
+  normal_print("\n");
+}
+
+/* function to print a horizontal bar */
+void print_bar(void) {
+  int i;
+  print_line();
+  for (i = 0; i < ((BOARD_WIDTH + 1) * (CELL_WIDTH + 1)); i++) {
+    normal_print("-");
+  }
+  print_line();
 }
