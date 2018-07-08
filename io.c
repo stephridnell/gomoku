@@ -118,13 +118,10 @@ enum input_result quit_game () {
     normal_print("Are you sure you want to quit the game? (y/n): ");
     result = get_input(selection, 1 + EXTRA_CHARS);
     if (result != IR_FAILURE) {
-      if (strncmp(selection, "y", 1) == 0) {
+      if (strncmp(selection, "y", 1) == 0 || strncmp(selection, "Y", 1) == 0) {
         return IR_RTM;
-      } else if (strncmp(selection, "n", 1) == 0) {
-        return IR_SUCCESS;
       } else {
-        invalid_menu_selection_error();
-        result = IR_FAILURE;
+        return IR_SUCCESS;
       }
     }
   }
