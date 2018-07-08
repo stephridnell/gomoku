@@ -19,7 +19,7 @@
  **/
 
 #ifndef IO_H /*include guard for the io module - ensures this header file is   \
-                included at most once in any source file */
+    included at most once in any source file */
 #define IO_H
 
 /**
@@ -50,7 +50,7 @@ enum input_result {
 #define DECIMAL 10
 
 /* the number of menu items in the main menu */
-#define NUM_MENU_ITEMS 3
+#define NUM_MENU_ITEMS 2
 
 /* ascii codes for corresponding menu items */
 #define PLAY_GAME 49
@@ -66,19 +66,27 @@ enum input_result {
 #define WHITE_COLOR "\033[37;1m"
 #define RESET_COLOR "\033[0;0m"
 
-/* width of each cell on the board */
-#define CELL_WIDTH 2
+#define MAXCLRLEN 5
 
-/**
- *  the number of token types - empty, red, white, invalid
- **/
-#define NUM_TOKEN_TYPES 4
+/* macro that prints a line of the character specified followed by a newline.
+ * This makes the printing of headings and the game board much easier */
+#define PUTLINE(CH, N)                           \
+  {                                              \
+    int count;                                   \
+    for (count = 0; count < (N); ++count)        \
+    {                                            \
+      putchar(CH);                               \
+    }                                            \
+    putchar('\n');                               \
+  }
 
 /**
  * global variable that holds the strings for printing an empty square, a red
  * token or a white token.
  **/
 extern const char* game_tokens[];
+
+extern const char* color_strings[];
 
 /**
  * public functions implemented for this module

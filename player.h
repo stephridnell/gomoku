@@ -19,7 +19,7 @@
 #define PLAYER_H
 /* forwards declaration of the game struct so we can pointers to game passed in
  * as parameters in this module */
-/* struct game; */
+struct game;
 
 /* the maximum length of a player's name */
 #define NAME_LENGTH 20
@@ -39,7 +39,7 @@ struct player {
 /**
  * publicly callable functiohs from this module
  **/
-enum input_result init_player(struct player *currentPlayer, enum cell token, struct game* theGame, int playerNumber);
+enum input_result init_player(struct player*, enum cell, struct game*, int);
 
 enum input_result take_turn(struct player*);
 

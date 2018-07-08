@@ -27,6 +27,10 @@ const char* game_tokens[NUM_TOKEN_TYPES] = {
   " ", RED_COLOR "x" RESET_COLOR, WHITE_COLOR "o" RESET_COLOR, NULL
 };
 
+const char* color_strings[NUM_TOKEN_TYPES] = {
+  "Empty", RED_COLOR "red" RESET_COLOR, WHITE_COLOR "white" RESET_COLOR, NULL
+};
+
 /**
  * the read rest of line function - clears the buffer when there is buffer
  *  overflow
@@ -78,12 +82,32 @@ int normal_print(const char* format, ...) {
  * print menu
  **/
 void print_menu(void) {
-  normal_print("\n");
-  normal_print("Welcome to Gomoku \n");
-  normal_print("==================\n");
-  normal_print("1) play the game\n");
-  normal_print("2) quit\n");
-  normal_print("Please enter your choice: ");
+  /* the menu items */
+  char* menu_items[] = { "play the game", "quit" };
+  int count;
+
+  /* display the heading */
+  char* heading = "\nWelcome to Gomoku";
+  puts(heading);
+  PUTLINE('=', strlen(heading));
+
+  /* display each menu item */
+  for (count = 0; count < NUM_MENU_ITEMS; ++count) {
+    printf("%d) %s\n", count + 1, menu_items[count]);
+  }
+
+}
+
+/**
+ * prints the heading of the board
+ **/
+static void print_heading(void) {
+  int count;
+  for (count = 0; count < BOARD_WIDTH; ++count) {
+    printf("%2d|", count + 1);
+  }
+  putchar('\n');
+  PUTLINE('-', (BOARD_WIDTH + 1) * 3);
 }
 
 /* gets the user input and does buffer handling */
@@ -110,6 +134,7 @@ enum input_result get_input(char* inputValue, int size) {
   **/
   if(inputValue[strlen(inputValue) - 1] != '\n') {
     read_rest_of_line();
+    too_long_error();
     return IR_FAILURE;
   }
 
@@ -129,7 +154,6 @@ int get_menu_input(void) {
   ioResult = get_input(menuInput, sizeof(menuInput));
 
   if (!ioResult) {
-    too_long_error();
     return ioResult;
   } else if (!is_int(menuInput)) {
     non_int_error();
@@ -150,47 +174,36 @@ BOOLEAN is_int(const char * s) {
   return TRUE;
 }
 
-/* function to display the board */
-void display_board(board gameBoard) {
-  int x, y;
+/**
+ * displays the game board including heading, etc.
+ **/
+void display_board(board theboard) {
+  int y, x;
 
-  /* print line to make sure board appears on next line */
-  print_line();
+  /* print the heading for the board */
+  printf("\n");
+  printf("  |");
+  print_heading();
 
-  /* print the space in the top left corner */
-  normal_print("%-*s", CELL_WIDTH, "");
-  
-  /* print header */
-  for (x = 1; x <= BOARD_WIDTH; x++) {
-    normal_print("|%*d", CELL_WIDTH, x);
-  }
-  normal_print("|");
+  /* for each row of the board */
+  for (y = 0; y < BOARD_HEIGHT; ++y) {
+    /* print the row number */
+    printf("%-2d", BOARD_HEIGHT - y);
 
-  /* print body */
-  for (x = BOARD_HEIGHT - 1; x >= 0; x--) {
-    print_bar("-");
-    /* print row header */
-    normal_print("%-*d", CELL_WIDTH, x + 1);
-    /* print cells */
-    for (y = BOARD_HEIGHT - 1; y >= 0; y--) {
-      normal_print("|%*s", CELL_WIDTH, game_tokens[gameBoard[y][x]]);
+    /* print the values of each cell in the row */
+    for (x = 0; x < BOARD_WIDTH; ++x) {
+      printf("| %s", game_tokens[theboard[y][x]]);
     }
-    normal_print("|");
+    printf("|\n");
+
+    /* print the line under each row */
+
+    if (y < BOARD_HEIGHT - 1) {
+      PUTLINE('-', 3 * (BOARD_WIDTH + 1));
+    } else {
+      PUTLINE('=', 3 * (BOARD_WIDTH + 1));
+    }
+  
   }
-  print_bar("=");
 }
 
-/* function to print a new line */
-void print_line(void) {
-  normal_print("\n");
-}
-
-/* function to print a horizontal bar with a custom symbol */
-void print_bar(char* symbol) {
-  int i;
-  print_line();
-  for (i = 0; i < ((BOARD_WIDTH + 1) * (CELL_WIDTH + 1)); i++) {
-    normal_print("%s", symbol);
-  }
-  print_line();
-}

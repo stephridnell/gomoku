@@ -18,11 +18,38 @@
  * initialise the board to be an empty board
  **/
 void init_board(board theBoard) {
-  int x, y;
 
-	for(y = 0; y < BOARD_WIDTH; y++) {
-		for(x = 0; x < BOARD_HEIGHT; x++) {
-			theBoard[y][x] = C_EMPTY;
-		}
-	}
+	memset(theBoard, 0, sizeof(enum cell) * BOARD_WIDTH * BOARD_HEIGHT);
+
+}
+
+/**
+ * set the value in a cell to the contents value specified
+ * from paul miller sample solution for part a
+ **/
+BOOLEAN set_cell(board aboard, int x, int y, enum cell contents) {
+
+  if (x >= BOARD_WIDTH || y >= BOARD_HEIGHT || x < 0 || y < 0) {
+    return FALSE;
+  }
+
+  aboard[y][x] = contents;
+
+  return TRUE;
+
+}
+
+/**
+ * gets the value stored in a cell. Note that I am returning a pointer for when
+ * an invalid request is sents - int that case we should return NULL
+ * from paul miller sample solution for part a
+ **/
+enum cell* get_cell(board aboard, int x, int y) {
+
+  if (x >= BOARD_WIDTH || y >= BOARD_HEIGHT || x < 0 || y < 0) {
+    return NULL;
+  }
+
+	return &aboard[y][x];
+
 }

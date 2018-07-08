@@ -23,6 +23,9 @@
 #define BOARD_HEIGHT 15
 #define BOARD_WIDTH BOARD_HEIGHT
 
+/* how many token types in the system */
+#define NUM_TOKEN_TYPES 4
+
 /* a cell on the board */
 enum cell {
   C_EMPTY,
@@ -35,9 +38,19 @@ enum cell {
  * the hood it is still an array of ints and will behave accordingly */
 typedef enum cell board[BOARD_HEIGHT][BOARD_WIDTH];
 
+/* a type name for a single row of the game board */
+typedef enum cell row[BOARD_WIDTH];
+
+/* pointer to a row - basically what C degrades the 2d array to */
+typedef row* boardref;
+
 /* public functions advertised for this module. You should add additional
  * functions for the managing of the game board */
 
 void init_board(board);
+
+BOOLEAN set_cell(board, int, int, enum cell);
+
+enum cell* get_cell(board, int, int);
 
 #endif /* include guard for the board module */

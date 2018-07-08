@@ -15,6 +15,12 @@ int main(void) {
 
   int selection;
 
+  /* initialise random number generator */
+  srand(time(NULL));
+
+  /* display the menu continuously until the user decided to quit the
+  * program
+  */
  do {
 
    print_menu();
@@ -37,11 +43,7 @@ int main(void) {
  } 
   
 } while (selection != EXIT_GAME);
-
-  /* initialise the random number generator for your program */
-  /* display the menu continuously until the user decided to quit the
-   * program
-   */
-
+  
   return EXIT_SUCCESS;
+
 }

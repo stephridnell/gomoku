@@ -9,6 +9,7 @@
 #include "board.h"
 #include "player.h"
 #include "rules.h"
+#include "io.h"
 
 /**
  * This .h file and the accompanying .c file (game.c) manage the overall game.

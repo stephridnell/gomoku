@@ -21,69 +21,67 @@
  * player ensuring that a random player is selected to play the game. You should
  * also ensure the board is coorectly initialised through a call to
  * init_board().
+ * 
+ * some code taken from paul miller part a sample solution
  **/
 enum input_result init_game(struct game* newGame) {
-  struct player playerOne, playerTwo;
-  int firstPlayer,secondPlayer;
-  enum input_result inputResult;
 
-  /* assign random tokens */
-  int playerOneToken = rand() % 2;
-  int playerTwoToken = 1 - playerOneToken + 1;
-  playerOneToken++;
-  
-  /* init players */
-  inputResult = init_player(
-    &playerOne,
-    playerOneToken == 1 ? C_RED : C_WHITE,
-    newGame, 1
-  );
+  int count;
+  int token;
+  int currentPlayer;
 
-  /* TODO implement the return to menu stuff */
-  if (inputResult == IR_RTM) {
-    printf("return to menu?");
-  }
+  /* select random tokens */
+  token = rand() % NUM_PLAYERS + 1;
 
-  inputResult = init_player(
-    &playerTwo,
-    playerTwoToken == 1 ? C_RED : C_WHITE,
-    newGame, 2
-  );
-
-  /* TODO implement the return to menu stuff */
-  if (inputResult == IR_RTM) {
-    printf("return to menu?");
-  }
-
-  /* set the game players */
-  newGame->players[0] = playerOne;
-  newGame->players[1] = playerTwo;
-
-  /* set the current and other player according to rand */
-  firstPlayer = rand() % 2;
-  secondPlayer = 1 - playerOneToken + 1;
-  newGame->current = &newGame->players[firstPlayer];
-  newGame->other = &newGame->players[secondPlayer];
-
+  /* initialise the board */
   init_board(newGame->gameBoard);
 
-  return IR_FAILURE;
+  /* initialise the players */
+  for (count = 0; count < NUM_PLAYERS; ++count) {
+    /* select a valid token for each player */
+    ++token;
+    if (token == C_INVALID) {
+      token = C_RED;
+    }
+
+    /* 
+    * call init_player to do the initialisation of the players.
+    * Please note that as this is a function that calls i/o
+    * functions it returns a enum indicating success / failure or
+    * request to quit the game
+    */
+    if (init_player(&newGame->players[count], token, newGame, count + 1) == IR_RTM) {
+      return IR_RTM;
+    }
+  }
+  
+  /* select the play order of the players */
+  currentPlayer = rand() % NUM_PLAYERS;
+  newGame->current = &newGame->players[currentPlayer];
+  currentPlayer = (currentPlayer + 1 % NUM_PLAYERS);
+  newGame->other = &newGame->players[currentPlayer % NUM_PLAYERS];
+  return IR_SUCCESS;
+
 }
 
 /**
  * manages the main game loop - calls init_game to initialise the game and
  * then loops and calls take_turn for the current player and swaps players until
  * a player has won the game
+ * 
+ * some code taken from paul miller part a sample solution
  **/
 void play_game(void) {
   /* the game struct that holds the data on the game state */
   struct game currentGame;
+
   /* init the game struct */
-  init_game(&currentGame);
-  /* the main game loop */
-  normal_print("%s plays first.\n\n", currentGame.current->name);
+  if (init_game(&currentGame) == IR_RTM) {
+    normal_print("the game has been quit!\n");
+    return;
+  }
+
   display_board(currentGame.gameBoard);
-  /* swap the game pointers */
 }
 
 /**

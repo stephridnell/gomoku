@@ -20,23 +20,21 @@
  * should also prompt the user for this name
  **/
 enum input_result init_player(struct player* currentPlayer, enum cell token, struct game* theGame, int playerNumber) {
-  enum input_result ioResult = IR_FAILURE;
+  char name[NAME_LENGTH + EXTRA_CHARS];
+  enum input_result result = IR_FAILURE;
 
-  while (!ioResult) {
-    normal_print("Please enter the name for player %d: ", playerNumber);
-
-    ioResult = get_input(currentPlayer->name, sizeof(currentPlayer->name));
-  
-    if (!ioResult) {
-      too_long_error();
-    }
-
-  }
-
-  currentPlayer->token = token;
+  /* associate the game with this player */
   currentPlayer->currentGame = theGame;
-  
-  return ioResult;
+  /* associate the token with the player */
+  currentPlayer->token = token;
+  /* prompt the user for their name */
+  while (result == IR_FAILURE) {
+    normal_print("Please enter the name for player %d: ", playerNumber);
+    result = get_input(name, NAME_LENGTH + EXTRA_CHARS);
+  }
+  /* copy the name read from the keyboard into the player struct */
+  strcpy(currentPlayer->name, name);
+  return IR_SUCCESS;
 }
 
 /**
