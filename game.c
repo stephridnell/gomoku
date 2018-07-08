@@ -97,6 +97,10 @@ void play_game(void) {
  * more than a few lines of code are worth elsewhere in this assignment.
  **/
 void swap_players(struct player** first, struct player** second) {
+  /* create a temp player to store the first player while we switch the first player to be the second one */
+  struct player* temp = *first;
+  *first = *second;
+  *second = temp;
 }
 
 /**
@@ -109,6 +113,7 @@ enum input_result first_round(struct game* theGame) {
   char location[NAME_LENGTH + EXTRA_CHARS];
   enum input_result result = IR_FAILURE;
 
+  /* get first set of coords */
   while (result == IR_FAILURE) {
     normal_print("Please enter a location for a %s token: ", color_strings[theGame->current->token]);
     result = get_input(location, 5 + EXTRA_CHARS);
@@ -126,11 +131,9 @@ enum input_result first_round(struct game* theGame) {
         result = IR_FAILURE;
       }
     }
-
   }
 
-  normal_print("x: %d\n", coords.x);
-  normal_print("y: %d\n", coords.y);
+
 
   return IR_FAILURE;
 }
