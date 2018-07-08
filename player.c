@@ -52,5 +52,31 @@ enum input_result init_player(struct player* currentPlayer, enum cell token, str
  * user has chosen to quit the game, return IR_RTM.
  **/
 enum input_result take_turn(struct player* currentPlayer) {
+  struct coordinate coords;
+  char location[NAME_LENGTH + EXTRA_CHARS];
+  enum input_result result = IR_FAILURE;
+
+  while (result == IR_FAILURE) {
+    normal_print("Please enter your turn in a comma delimited format, eg: 15,13: ");
+    result = get_input(location, 5 + EXTRA_CHARS);
+    if (result == IR_RTM) {
+      result = quit_game();
+      if (result == IR_SUCCESS) {
+        result = IR_FAILURE;
+      } else if (result == IR_RTM) {
+        return IR_RTM;
+      }
+    }
+    if (result != IR_FAILURE) {
+      if (!str_to_coord(location, &coords)) {
+        result = IR_FAILURE;
+      } else if (move_is_valid(currentPlayer, &coords)) {
+        apply_move(currentPlayer->currentGame->gameBoard, &coords, currentPlayer->token);
+      } else {
+        result = IR_FAILURE;
+        invalid_move_error(location);
+      }
+    }
+  }
   return IR_FAILURE;
 }

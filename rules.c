@@ -29,7 +29,7 @@ BOOLEAN is_winner(const struct player* currentPlayer) {
  * check if a move is valid. It is valid if the cell specified is empty
  **/
 BOOLEAN move_is_valid(const struct player* currentPlayer, const struct coordinate* curmove) {
-  return FALSE;
+  return TRUE;
 }
 
 /**
@@ -37,5 +37,6 @@ BOOLEAN move_is_valid(const struct player* currentPlayer, const struct coordinat
  * themove to the toke specified.
  **/
 BOOLEAN apply_move(board theboard, const struct coordinate* themove, enum cell token) {
-  return FALSE;
+  set_cell(theboard, themove->x, themove->y, token);
+  return TRUE;
 }

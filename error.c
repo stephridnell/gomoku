@@ -38,3 +38,7 @@ void invalid_first_move(void) {
 void invalid_colour_error (const char* input) {
   error_print("%s is not a valid colour. Please try again.\n", input);
 }
+
+void invalid_move_error(const char* input) {
+  error_print("%s is not a valid move. Please try again.\n", input);
+}

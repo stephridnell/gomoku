@@ -92,11 +92,26 @@ void play_game(void) {
     return;
   }
 
+  /* the game loop */
   while (!winner) {
-    normal_print("It is %s's turn and their colour is %s.", currentGame.current->name, color_strings[currentGame.current->token]);
-    swap_players(&currentGame.current, &currentGame.other);
-    normal_print("Please enter your turn in a comma delimited format, eg: 15,13: ");
-  } 
+    display_board(currentGame.gameBoard);
+    normal_print("It is %s's turn and their colour is %s.\n", currentGame.current->name, color_strings[currentGame.current->token]);
+    
+    if (take_turn(currentGame.current) == IR_RTM) {
+      normal_print("the game has been quit!\n");
+      return;
+    }
+
+    winner = is_winner(currentGame.current);
+
+    if (!winner) {
+      swap_players(&currentGame.current, &currentGame.other);
+    }
+  }
+
+  normal_print("%s is the winner.\n", currentGame.current->name);
+  display_board(currentGame.gameBoard);
+  return;
 }
 
 /**

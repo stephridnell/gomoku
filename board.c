@@ -34,8 +34,6 @@ BOOLEAN set_cell(board aboard, int x, int y, enum cell contents) {
     map[i] = BOARD_HEIGHT - i;
   }
 
-  normal_print("X: %d, Y: %d", x, y);
-
   if (x >= BOARD_WIDTH || y >= BOARD_HEIGHT || x < 0 || y < 0) {
     return FALSE;
   }
