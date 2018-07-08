@@ -13,4 +13,6 @@ void non_int_error(void);
 
 void invalid_menu_selection_error(void);
 
+void invalid_coordinate_error(const char* input);
+
 #endif

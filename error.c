@@ -26,3 +26,7 @@ void non_int_error(void) {
 void invalid_menu_selection_error(void) {
   error_print("invalid menu item selected\n");
 }
+
+void invalid_coordinate_error(const char* input) {
+  error_print("%s is not a valid coordinate string. Please try again.\n", input);
+}

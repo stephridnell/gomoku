@@ -229,3 +229,64 @@ void display_board(board theboard) {
   }
 }
 
+/* some code from example at https://www.tutorialspoint.com/c_standard_library/c_function_strtok.htm
+   and paul miller shared_files tutes */
+BOOLEAN str_to_coord(const char input[], struct coordinate* coords) {
+  char str[10];
+  char *token;
+  char s[2] = ",";
+
+  strcpy(str, input);
+  
+  /* get first token */
+  token = strtok(str, s);
+  /* set x */
+  if (!token) {
+    invalid_coordinate_error(input);
+    return FALSE;
+  }
+  if (!str_to_int(token, &coords->x)) {
+    invalid_coordinate_error(input);
+    return FALSE;
+  }
+
+  /* get second token */
+  token = strtok(NULL, s);
+  /* set y */
+  if (!token) {
+    invalid_coordinate_error(input);
+    return FALSE;
+  }
+  if (!str_to_int(token, &coords->y)) {
+    invalid_coordinate_error(input);
+    return FALSE;
+  }
+
+  /* check to see if user typed in too much stuff */
+  token = strtok(NULL, ",");
+  if (token != NULL) {
+    invalid_coordinate_error(input);
+    return FALSE;
+  }
+
+  return TRUE;
+}
+
+/* some code from example at https://www.tutorialspoint.com/c_standard_library/c_function_strtol.htm
+   and paul miller shared_files tutes */
+BOOLEAN str_to_int(const char str[], int* ptrResult) {
+
+  char *ptr;
+  long ret;
+
+  ret = strtol(str, &ptr, 10);
+
+  /* check if there is any string - if there is return false */
+  if (*ptr) {
+    return FALSE;
+  }
+
+  *ptrResult = ret;
+  return TRUE;
+}
+

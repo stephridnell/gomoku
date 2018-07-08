@@ -12,6 +12,11 @@
                     each source file. */
 #define SHARED_H
 
+/** defines a cartiesian coordinate for board locations (moved from rules to shared) **/
+struct coordinate {
+  int x, y;
+};
+
 /**
  * definition of the BOOLEAN datatype. Remember that all counting in C begins at
  * 0!

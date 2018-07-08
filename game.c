@@ -81,7 +81,11 @@ void play_game(void) {
     return;
   }
 
+  normal_print("%s plays first.\n\n", currentGame.current->name);
+
   display_board(currentGame.gameBoard);
+
+  first_round(&currentGame);
 }
 
 /**
@@ -101,5 +105,32 @@ void swap_players(struct player** first, struct player** second) {
  * further details.
  **/
 enum input_result first_round(struct game* theGame) {
+  struct coordinate coords;
+  char location[NAME_LENGTH + EXTRA_CHARS];
+  enum input_result result = IR_FAILURE;
+
+  while (result == IR_FAILURE) {
+    normal_print("Please enter a location for a %s token: ", color_strings[theGame->current->token]);
+    result = get_input(location, 5 + EXTRA_CHARS);
+    if (result == IR_RTM) {
+      result = quit_game();
+      if (result == IR_SUCCESS) {
+        result = IR_FAILURE;
+      } else if (result == IR_RTM) {
+        return IR_RTM;
+      }
+    }
+
+    if (result != IR_FAILURE) {
+      if (!str_to_coord(location, &coords)) {
+        result = IR_FAILURE;
+      }
+    }
+
+  }
+
+  normal_print("x: %d\n", coords.x);
+  normal_print("y: %d\n", coords.y);
+
   return IR_FAILURE;
 }

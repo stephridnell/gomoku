@@ -45,6 +45,7 @@ enum input_result {
  * should be treated as a DECIMAL number.
  **/
 #define LINE_LENGTH 80
+#define COORD_LENGTH 5
 #define MENU_SELECTION_LENGTH 1
 #define EXTRA_CHARS 2
 #define DECIMAL 10
@@ -112,5 +113,11 @@ BOOLEAN is_int(const char * s);
 void print_line(void);
 
 void print_bar(char* symbol);
+
+enum input_result read_coordinates(const char prompt[], struct coordinate* coords);
+
+BOOLEAN str_to_int(const char str[], int* result);
+
+BOOLEAN str_to_coord(const char[], struct coordinate*);
 
 #endif /* include guard for the io module */

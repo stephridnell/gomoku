@@ -26,11 +26,6 @@ struct player;
 /* the number in a row required for a win */
 #define NUM_IN_ROW 5
 
-/* coordinate is an x-y pair that specifies a location on the board */
-struct coordinate {
-  int x, y;
-};
-
 /**
  * publicly advertised functions for this module
  **/
