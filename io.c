@@ -110,6 +110,27 @@ static void print_heading(void) {
   PUTLINE('-', (BOARD_WIDTH + 1) * 3);
 }
 
+enum input_result quit_game () {
+  char selection[1 + EXTRA_CHARS];
+  enum input_result result = IR_FAILURE;
+
+  while (result == IR_FAILURE) {
+    normal_print("Are you sure you want to quit the game? (y/n): ");
+    result = get_input(selection, 1 + EXTRA_CHARS);
+    if (result != IR_FAILURE) {
+      if (strncmp(selection, "y", 1) == 0) {
+        return IR_RTM;
+      } else if (strncmp(selection, "n", 1) == 0) {
+        return IR_SUCCESS;
+      } else {
+        invalid_menu_selection_error();
+        result = IR_FAILURE;
+      }
+    }
+  }
+  return IR_FAILURE;
+}
+
 /* gets the user input and does buffer handling */
 enum input_result get_input(char* inputValue, int size) {
   fgets(inputValue, size, stdin);
@@ -119,11 +140,12 @@ enum input_result get_input(char* inputValue, int size) {
     return IR_RTM;
   }
 
-  /* if crtl+D detected - read rest of line and return rtm */
+  /* if crtl+D detected - read rest of line and return rtm 
   if (feof(stdin)) {
     read_rest_of_line();
     return IR_RTM;
   }
+  */
 
   /* Code courtesy of Paul Miller, week 3 sample material */
 

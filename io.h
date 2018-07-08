@@ -103,6 +103,8 @@ void print_menu(void);
 
 enum input_result get_input(char* inputValue, int size);
 
+enum input_result quit_game();
+
 int get_menu_input(void);
 
 BOOLEAN is_int(const char * s);

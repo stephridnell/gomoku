@@ -31,6 +31,14 @@ enum input_result init_player(struct player* currentPlayer, enum cell token, str
   while (result == IR_FAILURE) {
     normal_print("Please enter the name for player %d: ", playerNumber);
     result = get_input(name, NAME_LENGTH + EXTRA_CHARS);
+    if (result == IR_RTM) {
+      result = quit_game();
+      if (result == IR_SUCCESS) {
+        result = IR_FAILURE;
+      } else if (result == IR_RTM) {
+        return IR_RTM;
+      }
+    }
   }
   /* copy the name read from the keyboard into the player struct */
   strcpy(currentPlayer->name, name);
