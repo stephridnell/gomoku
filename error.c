@@ -30,3 +30,11 @@ void invalid_menu_selection_error(void) {
 void invalid_coordinate_error(const char* input) {
   error_print("%s is not a valid coordinate string. Please try again.\n", input);
 }
+
+void invalid_first_move(void) {
+  error_print("Error: That's not a valid first move. A valid first move must be in the centre of the board.\n");
+}
+
+void invalid_colour_error (const char* input) {
+  error_print("%s is not a valid colour. Please try again.\n", input);
+}

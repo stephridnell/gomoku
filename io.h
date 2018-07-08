@@ -114,8 +114,6 @@ void print_line(void);
 
 void print_bar(char* symbol);
 
-enum input_result read_coordinates(const char prompt[], struct coordinate* coords);
-
 BOOLEAN str_to_int(const char str[], int* result);
 
 BOOLEAN str_to_coord(const char[], struct coordinate*);

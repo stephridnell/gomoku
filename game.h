@@ -10,6 +10,7 @@
 #include "player.h"
 #include "rules.h"
 #include "io.h"
+#include "error.h"
 
 /**
  * This .h file and the accompanying .c file (game.c) manage the overall game.

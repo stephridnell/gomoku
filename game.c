@@ -7,6 +7,7 @@
  * study period 2, 2018.
  *****************************************************************************/
 #include "game.h"
+#include <math.h>
 
 /**
  * this file contains the implementation of functions for the management of the
@@ -74,6 +75,7 @@ enum input_result init_game(struct game* newGame) {
 void play_game(void) {
   /* the game struct that holds the data on the game state */
   struct game currentGame;
+  BOOLEAN winner = FALSE;
 
   /* init the game struct */
   if (init_game(&currentGame) == IR_RTM) {
@@ -85,7 +87,16 @@ void play_game(void) {
 
   display_board(currentGame.gameBoard);
 
-  first_round(&currentGame);
+  if (first_round(&currentGame) == IR_RTM) {
+    normal_print("the game has been quit!\n");
+    return;
+  }
+
+  while (!winner) {
+    normal_print("It is %s's turn and their colour is %s.", currentGame.current->name, color_strings[currentGame.current->token]);
+    swap_players(&currentGame.current, &currentGame.other);
+    normal_print("Please enter your turn in a comma delimited format, eg: 15,13: ");
+  } 
 }
 
 /**
@@ -110,10 +121,12 @@ void swap_players(struct player** first, struct player** second) {
  **/
 enum input_result first_round(struct game* theGame) {
   struct coordinate coords;
+  /* enum cell *currentCell; */
   char location[NAME_LENGTH + EXTRA_CHARS];
   enum input_result result = IR_FAILURE;
+  int turns = 0, turnsCopy = 0, colour = 0;
 
-  /* get first set of coords */
+  /* first player goes twice */
   while (result == IR_FAILURE) {
     normal_print("Please enter a location for a %s token: ", color_strings[theGame->current->token]);
     result = get_input(location, 5 + EXTRA_CHARS);
@@ -129,11 +142,175 @@ enum input_result first_round(struct game* theGame) {
     if (result != IR_FAILURE) {
       if (!str_to_coord(location, &coords)) {
         result = IR_FAILURE;
+      } else {
+        if (coords.x != ceil(BOARD_WIDTH / 2.0) || coords.y != ceil(BOARD_HEIGHT / 2.0)) {
+          invalid_first_move();
+          result = IR_FAILURE;
+        } else {
+          set_cell(theGame->gameBoard, coords.x, coords.y, theGame->current->token);
+          display_board(theGame->gameBoard);
+        }
       }
     }
   }
 
+  result = IR_FAILURE;
 
+  while (result == IR_FAILURE) {
+    normal_print("Please enter a location for a %s token: ", color_strings[theGame->current->token]);
+    result = get_input(location, 5 + EXTRA_CHARS);
+    if (result == IR_RTM) {
+      result = quit_game();
+      if (result == IR_SUCCESS) {
+        result = IR_FAILURE;
+      } else if (result == IR_RTM) {
+        return IR_RTM;
+      }
+    }
 
-  return IR_FAILURE;
+    if (result != IR_FAILURE) {
+      if (!str_to_coord(location, &coords)) {
+        result = IR_FAILURE;
+      } else {
+        /* make sure next to another piece
+        currentCell = get_cell(theGame->gameBoard, coords.x, coords.y); */
+        set_cell(theGame->gameBoard, coords.x, coords.y, theGame->current->token);
+        display_board(theGame->gameBoard);
+      }
+    }
+  }
+
+  /* place token of other colour */
+
+  result = IR_FAILURE;
+
+  while (result == IR_FAILURE) {
+    normal_print("Please enter a location for a %s token: ", color_strings[theGame->other->token]);
+    result = get_input(location, 5 + EXTRA_CHARS);
+    if (result == IR_RTM) {
+      result = quit_game();
+      if (result == IR_SUCCESS) {
+        result = IR_FAILURE;
+      } else if (result == IR_RTM) {
+        return IR_RTM;
+      }
+    }
+
+    if (result != IR_FAILURE) {
+      if (!str_to_coord(location, &coords)) {
+        result = IR_FAILURE;
+      } else {
+        set_cell(theGame->gameBoard, coords.x, coords.y, theGame->other->token);
+        display_board(theGame->gameBoard);
+      }
+    }
+  }
+
+  result = IR_FAILURE;
+
+  swap_players(&theGame->current, &theGame->other);
+
+  normal_print("It is now %s's turn.\n", theGame->current->name);
+
+  while (result == IR_FAILURE) {
+    normal_print("Do you wish to enter one (1) or two (2) tokens (Please enter a digit) ? ");
+    result = get_input(location, 2 + EXTRA_CHARS);
+    if (str_to_int(location, &turns)) {
+      if (turns != 1 && turns != 2) {
+        result = IR_FAILURE;
+      }
+    } else {
+      result = IR_FAILURE;
+    }
+    if (result == IR_RTM) {
+      result = quit_game();
+      if (result == IR_SUCCESS) {
+        result = IR_FAILURE;
+      } else if (result == IR_RTM) {
+        return IR_RTM;
+      }
+    }
+  }
+
+  result = IR_FAILURE;
+
+  while (result == IR_FAILURE) {
+    normal_print("Please enter the colour of the token(s) to play: ");
+    result = get_input(location, 6 + EXTRA_CHARS);
+    if (strncmp(location, "red", 1) == 0) {
+       colour = C_RED;
+    } else if (strncmp(location, "white", 1) == 0) {
+       colour = C_WHITE;
+    } else {
+      invalid_colour_error(location);
+      result = IR_FAILURE;
+    }
+    if (result == IR_RTM) {
+      result = quit_game();
+      if (result == IR_SUCCESS) {
+        result = IR_FAILURE;
+      } else if (result == IR_RTM) {
+        return IR_RTM;
+      }
+    }
+  }
+
+  turnsCopy = turns;
+
+  while (turns > 0) {
+    result = IR_FAILURE;
+    while (result == IR_FAILURE) {
+      normal_print("Please enter a location for a %s token: ", color_strings[colour]);
+      result = get_input(location, 5 + EXTRA_CHARS);
+      if (result == IR_RTM) {
+        result = quit_game();
+        if (result == IR_SUCCESS) {
+          result = IR_FAILURE;
+        } else if (result == IR_RTM) {
+          return IR_RTM;
+        }
+      }
+
+      if (result != IR_FAILURE) {
+        if (!str_to_coord(location, &coords)) {
+          result = IR_FAILURE;
+        } else {
+          set_cell(theGame->gameBoard, coords.x, coords.y, colour);
+          display_board(theGame->gameBoard);
+        }
+      }
+    }
+    turns--;
+  }
+
+  result = IR_FAILURE;
+
+  swap_players(&theGame->current, &theGame->other);
+  
+  if (turnsCopy == 2) {
+    while (result == IR_FAILURE) {
+      normal_print("%s, Which colour do you wish to play for the rest of the game? \n", theGame->current->name);
+      result = get_input(location, 6 + EXTRA_CHARS);
+      if (strncmp(location, "red", 1) == 0) {
+        theGame->current->token = C_RED;
+        theGame->other->token = C_WHITE;
+      } else if (strncmp(location, "white", 1) == 0) {
+        theGame->current->token = C_WHITE;
+        theGame->other->token = C_RED;
+      } else {
+        invalid_colour_error(location);
+        result = IR_FAILURE;
+      }
+      if (result == IR_RTM) {
+        result = quit_game();
+        if (result == IR_SUCCESS) {
+          result = IR_FAILURE;
+        } else if (result == IR_RTM) {
+          return IR_RTM;
+        }
+      }
+    }
+  }
+
+  return IR_SUCCESS;
 }

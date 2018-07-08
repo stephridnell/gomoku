@@ -15,4 +15,8 @@ void invalid_menu_selection_error(void);
 
 void invalid_coordinate_error(const char* input);
 
+void invalid_first_move(void);
+
+void invalid_colour_error (const char* input);
+
 #endif

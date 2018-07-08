@@ -28,12 +28,19 @@ void init_board(board theBoard) {
  * from paul miller sample solution for part a
  **/
 BOOLEAN set_cell(board aboard, int x, int y, enum cell contents) {
+  int map[BOARD_HEIGHT];
+  int i;
+  for (i = 0; i < BOARD_HEIGHT; i++ ) {
+    map[i] = BOARD_HEIGHT - i;
+  }
+
+  normal_print("X: %d, Y: %d", x, y);
 
   if (x >= BOARD_WIDTH || y >= BOARD_HEIGHT || x < 0 || y < 0) {
     return FALSE;
   }
 
-  aboard[y][x] = contents;
+  aboard[map[y]][x - 1] = contents;
 
   return TRUE;
 
@@ -45,11 +52,16 @@ BOOLEAN set_cell(board aboard, int x, int y, enum cell contents) {
  * from paul miller sample solution for part a
  **/
 enum cell* get_cell(board aboard, int x, int y) {
+  int map[BOARD_HEIGHT];
+  int i;
+  for (i = 0; i < BOARD_HEIGHT; i++ ) {
+    map[i] = BOARD_HEIGHT - i;
+  }
 
   if (x >= BOARD_WIDTH || y >= BOARD_HEIGHT || x < 0 || y < 0) {
     return NULL;
   }
 
-	return &aboard[y][x];
+	return &aboard[map[y]][x - 1];
 
 }

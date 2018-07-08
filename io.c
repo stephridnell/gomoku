@@ -134,18 +134,16 @@ enum input_result quit_game () {
 /* gets the user input and does buffer handling */
 enum input_result get_input(char* inputValue, int size) {
   fgets(inputValue, size, stdin);
-  
   /* if the user just pressed enter - return rtm */
-  if (inputValue[0] == '\n') {
+  if (*inputValue == '\n') {
     return IR_RTM;
   }
 
-  /* if crtl+D detected - read rest of line and return rtm 
-  if (feof(stdin)) {
-    read_rest_of_line();
+  /* if the user enters crtl+d (== null) then i just get an infinite loop :S will fix later if time
+
+  if (fgets(inputValue, size, stdin) == NULL || *inputValue == '\n') {
     return IR_RTM;
-  }
-  */
+  } */
 
   /* Code courtesy of Paul Miller, week 3 sample material */
 
@@ -164,7 +162,7 @@ enum input_result get_input(char* inputValue, int size) {
   * remove the newline character as it is no longer needed
   * then return IR SUCCESS
   **/
-  inputValue[strlen(inputValue)-1] = 0;
+  inputValue[strlen(inputValue) - 1] = 0;
   return IR_SUCCESS;
 }
 
@@ -289,4 +287,3 @@ BOOLEAN str_to_int(const char str[], int* ptrResult) {
   *ptrResult = ret;
   return TRUE;
 }
-
